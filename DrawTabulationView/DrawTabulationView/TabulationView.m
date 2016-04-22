@@ -20,6 +20,40 @@
     
     NSArray* arr=[self getRandomArray];
     
+    CGFloat x=0;
+    
+    CGFloat y=0;
+    
+    CGFloat height=0;
+    
+    CGFloat width=0;
+    
+    for (int i=0; i<arr.count; i++) {
+        
+        CGFloat k=[arr[i] doubleValue]/100.0;
+        
+        height=rect.size.height*k;
+        width=rect.size.width/(arr.count*2-1);
+        
+        x=x+width*2*i;
+        y=rect.size.height-height;
+        
+        UIBezierPath* path=[UIBezierPath bezierPathWithRect:CGRectMake(x, y, width, height)];
+        
+        [[self gatRandomColor] set];
+        
+        [path fill];
+        
+        [path stroke];
+        
+    }
+}
+
+//生成饼状图
+-(void)setPieView:(CGRect)rect{
+    
+    NSArray* arr=[self getRandomArray];
+    
     CGPoint center=CGPointMake(rect.size.width/2, rect.size.height/2);
     
     CGFloat radius=rect.size.width/2;
@@ -38,7 +72,7 @@
         UIBezierPath* path=[UIBezierPath bezierPathWithArcCenter:center radius:radius-10 startAngle:startA endAngle:endA clockwise:YES];
         
         [path addLineToPoint:center];
-
+        
         
         [[self gatRandomColor] set];
         
@@ -48,8 +82,6 @@
         
     }
 }
-
-//随机生成饼状图
 
 //生成随机数组
 -(NSArray*)getRandomArray{
